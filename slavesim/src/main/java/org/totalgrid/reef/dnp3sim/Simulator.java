@@ -9,33 +9,13 @@ public class Simulator {
 
 
     public static void main(String[] args) {
-        System.out.println("main");
 
-        //System.loadLibrary("dnp3java");
+        StackSet set = new StackSet();
 
-        SlaveConfig slaveConfig = new SlaveConfig(); // defaults okay
+        StackConfig config = new StackConfig(5, 5, 5);
 
-        DeviceTemplate template = new DeviceTemplate(20, 20, 20, 20);
-
-        AppConfig appConfig = new AppConfig(); // defaults okay
-
-        LinkConfig linkConfig = new LinkConfig(false, false, 0, 1, 100, 5000);
-
-        SlaveStackConfig config = new SlaveStackConfig();
-        config.setLink(linkConfig);
-        config.setApp(appConfig);
-        config.setDevice(template);
-        config.setSlave(slaveConfig);
-
-        StackManager dnp = new StackManager(true);
-        dnp.AddLogHook(new ConsoleLogAdapter());
-
-        PhysLayerSettings phys = new PhysLayerSettings(FilterLevel.LEV_INFO, 5000);
-        dnp.AddTCPServer("port01", phys, "127.0.0.1", 50000);
-
-        CommandAcceptor cmdAcceptor = new CommandAcceptor();
-
-        IDataObserver obs = dnp.AddSlave("port01", "slave01", FilterLevel.LEV_INFO, cmdAcceptor, config);
+        set.addPort("port01", 50000);
+        set.addStack("slave01", "port01", config);
 
         System.out.println("Enter a line to quit.");
         try {
@@ -44,7 +24,9 @@ public class Simulator {
             System.out.println("IOException: " + ex);
         }
 
-        dnp.RemoveStack("slave01");
-        dnp.RemovePort("port01");
+        set.removeAllStacks();
+        set.removeAllPorts();
+        set.stop();
+
     }
 }
