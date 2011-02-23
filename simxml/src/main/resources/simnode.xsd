@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="slavesim.dnp3.reef.totalgrid.org"
+  xmlns="slavesim.dnp3.reef.totalgrid.org"
+  elementFormDefault="qualified"
+  xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+  jaxb:version="1.0">
+
+    <xs:element name="simNode">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="slaveArray" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="slaveArray">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="pointWidth" minOccurs="1" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="startPort" type="xs:unsignedInt" use="required"/>
+            <xs:attribute name="count" type="xs:unsignedInt" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="pointWidth">
+        <xs:complexType>
+            <xs:attribute name="status" type="xs:unsignedInt" use="required"/>
+            <xs:attribute name="analog" type="xs:unsignedInt" use="required"/>
+            <xs:attribute name="counter" type="xs:unsignedInt" use="required"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
