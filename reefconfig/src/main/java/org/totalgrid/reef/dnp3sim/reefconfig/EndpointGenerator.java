@@ -45,7 +45,13 @@ public class EndpointGenerator {
 
     public static Protocol buildProtocol(String name) {
         Protocol protocol = new Protocol();
+
         protocol.setName(name);
+
+        ConfigFile file = new ConfigFile();
+        file.setName("simdnpmaster.xml");
+        protocol.getConfigFile().add(file);
+
         return protocol;
     }
 

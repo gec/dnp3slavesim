@@ -48,6 +48,7 @@ public class CommEquipmentGenerator {
     public static <T extends PointType> T initPoint(T point, String name, int index) {
         point.setName(name);
         point.setIndex(index);
+        point.setUnit("sim");
         return point;
     }
 }

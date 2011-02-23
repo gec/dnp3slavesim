@@ -8,6 +8,7 @@ import org.totalgrid.reef.loader.equipment.Counter;
 import org.totalgrid.reef.loader.equipment.Equipment;
 import org.totalgrid.reef.loader.equipment.PointType;
 import org.totalgrid.reef.loader.equipment.Status;
+import org.totalgrid.reef.loader.equipment.Type;
 
 public class EquipModelGenerator {
 
@@ -26,6 +27,7 @@ public class EquipModelGenerator {
     public Equipment convertEquipment(org.totalgrid.reef.loader.communications.Equipment input) {
         Equipment equip = new Equipment();
         equip.setName(input.getName());
+        equip.getType().add(buildType("Device"));
 
         for(org.totalgrid.reef.loader.communications.Status st : input.getStatus()) {
             equip.getStatus().add(convertPoint(new Status(), st));
@@ -40,9 +42,16 @@ public class EquipModelGenerator {
         return equip;
     }
 
+    public static Type buildType(String name) {
+        Type typ = new Type();
+        typ.setName(name);
+        return typ;
+    }
+
     public static <E extends PointType, C extends org.totalgrid.reef.loader.communications.PointType>
     E convertPoint(E out, C in) {
         out.setName(in.getName());
+        out.setUnit(in.getUnit());
         return out;
     }
 }
