@@ -1,21 +1,43 @@
 package org.totalgrid.reef.dnp3sim;
 
 
-import org.totalgrid.reef.protocol.dnp3.*;
-
+import org.totalgrid.reef.dnp3sim.xml.SimNode;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+import java.io.FileReader;
 import java.io.IOException;
 
 public class Simulator {
 
+    public static SimNode loadXml(String file) {
+        SimNode config = null;
+        try {
+            JAXBContext context = JAXBContext.newInstance(SimNode.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            FileReader reader = new FileReader(file);
+            config = (SimNode)unmarshaller.unmarshal(reader);
 
-    public static void main(String[] args) {
+        }  catch (JAXBException ex) {
+            System.out.println(ex);
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+        return config;
+    }
 
-        StackSet set = new StackSet();
+    public static void main(String[] args) throws Exception {
 
-        StackConfig config = new StackConfig(5, 5, 5);
+        if (args.length < 1) {
+            throw new Exception("Must include config file.");
+        }
 
-        set.addPort("port01", 50000);
-        set.addStack("slave01", "port01", config);
+        SimNode config = loadXml(args[0]);
+        if (config == null) throw new RuntimeException("Could not load config.");
+
+        SimulationManager mgr = new SimulationManager(config);
+
+        mgr.start();
 
         System.out.println("Enter a line to quit.");
         try {
@@ -24,9 +46,6 @@ public class Simulator {
             System.out.println("IOException: " + ex);
         }
 
-        set.removeAllStacks();
-        set.removeAllPorts();
-        set.stop();
-
+        mgr.stop();
     }
 }

@@ -8,6 +8,9 @@ public class SimulationManager {
     private SimNode config;
     private StackSet stacks = new StackSet();
 
+    public SimulationManager(SimNode config) {
+        this.config = config;
+    }
 
     public void start() {
         loadConfig();
@@ -36,6 +39,7 @@ public class SimulationManager {
 
         for(int i = 0; i < portCount; i++) {
             int port = startPort + i;
+            System.out.println("Adding port: " + port);
             String portName = "port" + port;
             stacks.addPort(portName, port);
             stacks.addStack("slave" + port, portName, config);
