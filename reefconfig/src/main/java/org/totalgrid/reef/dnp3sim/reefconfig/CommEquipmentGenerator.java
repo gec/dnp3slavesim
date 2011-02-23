@@ -1,4 +1,4 @@
-package org.totalgrid.reef.dnp3sim.generation;
+package org.totalgrid.reef.dnp3sim.reefconfig;
 
 
 import org.totalgrid.reef.loader.communications.*;

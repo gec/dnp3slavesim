@@ -26,10 +26,11 @@ public class Simulator {
         return config;
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
 
         if (args.length < 1) {
-            throw new Exception("Must include config file.");
+            System.out.println("Must include config file.");
+            System.exit(1);
         }
 
         SimNode config = loadXml(args[0]);

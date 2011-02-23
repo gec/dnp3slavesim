@@ -1,12 +1,12 @@
-package org.totalgrid.reef.dnp3sim.generation;
+package org.totalgrid.reef.dnp3sim.reefconfig;
 
 
 import org.totalgrid.reef.loader.communications.*;
-import org.totalgrid.reef.loader.configuration.Configuration;
 
+import java.util.LinkedList;
 import java.util.List;
 
-public class CommModelGenerator {
+public class EndpointGenerator {
     final private String address;
     final private String mask;
     final private int startPort;
@@ -14,7 +14,7 @@ public class CommModelGenerator {
 
     final CommEquipmentGenerator equipmentGenerator;
 
-    public CommModelGenerator(String address, String mask, int startPort, int endpointCount, CommEquipmentGenerator equipmentGenerator) {
+    public EndpointGenerator(String address, String mask, int startPort, int endpointCount, CommEquipmentGenerator equipmentGenerator) {
         this.address = address;
         this.mask = mask;
         this.startPort = startPort;
@@ -22,15 +22,13 @@ public class CommModelGenerator {
         this.equipmentGenerator = equipmentGenerator;
     }
 
-    public CommunicationsModel commModel() {
-        CommunicationsModel model = new CommunicationsModel();
-
+    public List<Endpoint> allEndpoints() {
+        List<Endpoint> list = new LinkedList<Endpoint>();
         for(int i = 0; i < endpointCount; i++) {
             final int port = startPort + i;
-            model.getEndpoint().add(endpoint(port));
+            list.add(endpoint(port));
         }
-
-        return model;
+        return list;
     }
 
     public Endpoint endpoint(int port) {
