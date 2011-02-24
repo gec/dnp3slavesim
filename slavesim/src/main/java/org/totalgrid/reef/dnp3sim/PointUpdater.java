@@ -33,6 +33,10 @@ public class PointUpdater {
         pointCount = count;
     }
 
+    public int getPointCount() {
+        return pointCount;
+    }
+
     public void start() {
         loadInitial();
         timer.scheduleAtFixedRate(new RandomUpdateTask(), 1000, 1000);
@@ -55,20 +59,15 @@ public class PointUpdater {
     class RandomUpdateTask extends TimerTask {
         @Override
         public void run() {
-            /*for (ObserverUpdater up : updaters) {
-                up.update(4);
-            }*/
             double updatesToDo = 20;
             double updatesPerDevice = updatesToDo / (double)updaters.size();
 
             if (updatesPerDevice > 1) {
-                System.out.println("Updating all devices with " + (int)updatesPerDevice + " update.");
                 for (ObserverUpdater up : updaters) {
                     up.update((int)updatesPerDevice);
                 }
             } else {
                 int devicesToUpdate = (int)(updatesPerDevice * (double)updaters.size());
-                System.out.println("Updating " + devicesToUpdate + "with one update.");
                 Set<Integer> selected = new HashSet<Integer>();
                 for (int i = 0; i < devicesToUpdate; i++) {
                     int index = SetSelect.selectIndex(randPos(updaters.size()), selected, updaters.size());

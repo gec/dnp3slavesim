@@ -26,7 +26,7 @@ public class StackSet {
     public void addStack(String name, String portName, StackConfig config) {
         CommandAcceptor cmdAcceptor = new CommandAcceptor();
         SlaveStackConfig cfg = config.buildConfig();
-        IDataObserver obs = dnp.AddSlave(portName, name, FilterLevel.LEV_DEBUG, cmdAcceptor, cfg);
+        IDataObserver obs = dnp.AddSlave(portName, name, FilterLevel.LEV_WARNING, cmdAcceptor, cfg);
 
         stackMap.put(name, new Stack(obs, cmdAcceptor, config.getDimension()));
     }
@@ -44,7 +44,7 @@ public class StackSet {
     }
 
     public void addPort(String name, int port) {
-        PhysLayerSettings phys = new PhysLayerSettings(FilterLevel.LEV_DEBUG, 5000);
+        PhysLayerSettings phys = new PhysLayerSettings(FilterLevel.LEV_WARNING, 5000);
         dnp.AddTCPServer(name, phys, "127.0.0.1", port);
     }
 

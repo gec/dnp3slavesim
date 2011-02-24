@@ -26,7 +26,6 @@ public class XmlStackLoader {
 
         for (int i = 0; i < portCount; i++) {
             int port = startPort + i;
-            System.out.println("Adding port: " + port);
             String portName = "port" + port;
             stacks.addPort(portName, port);
             stacks.addStack("slave" + port, portName, config);

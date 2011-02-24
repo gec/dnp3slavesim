@@ -11,11 +11,15 @@ public class SimulationManager {
     }
 
     public void start() {
+        System.out.println("Starting sim");
+        System.out.println(" - Devices: " + stackSet.getStacks().size());
+        System.out.println(" - Points: " + updater.getPointCount());
         stackSet.start();
         updater.start();
     }
 
     public void stop() {
+        System.out.println("Ending simulation.");
         updater.stop();
         stackSet.removeAllStacks();
         stackSet.removeAllPorts();
