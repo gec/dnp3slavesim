@@ -63,12 +63,14 @@ public class PointUpdater {
             double updatesToDo = pointCount * ((double)interval/(double)1000) * pointRate;
             double updatesPerDevice = updatesToDo / (double)updaters.size();
 
+            //System.out.println("Updating per device: " + updatesPerDevice);
             if (updatesPerDevice > 1) {
                 for (ObserverUpdater up : updaters) {
                     up.update((int)updatesPerDevice);
                 }
             } else {
-                int devicesToUpdate = (int)(updatesPerDevice * (double)updaters.size());
+                int devicesToUpdate = (int)Math.ceil(updatesPerDevice * (double)updaters.size());
+                //System.out.println("Updating devices: " + devicesToUpdate);
                 Set<Integer> selected = new HashSet<Integer>();
                 for (int i = 0; i < devicesToUpdate; i++) {
                     int index = SetSelect.selectIndex(randPos(updaters.size()), selected, updaters.size());
