@@ -7,31 +7,28 @@ import java.util.*;
 
 public class StackSet {
 
-    public class StackItems {
-        private IDataObserver observer;
-        private CommandAcceptor acceptor;
-
-        public IDataObserver getObserver() {
-            return observer;
-        }
-
-        public CommandAcceptor getAcceptor() {
-            return acceptor;
-        }
-
-        public StackItems(IDataObserver observer, CommandAcceptor acceptor) {
-            this.observer = observer;
-            this.acceptor = acceptor;
-        }
-
-    }
-
-    private StackManager dnp = new StackManager(true);
-    private Map<String, StackItems> stackMap = new HashMap<String, StackItems>();
+    private StackManager dnp = new StackManager(false);
+    private Map<String, Stack> stackMap = new HashMap<String, Stack>();
     private ConsoleLogAdapter logAdapter = new ConsoleLogAdapter();
 
     public StackSet() {
         dnp.AddLogHook(logAdapter);
+    }
+
+    public Vector<IDataObserver> getObservers() {
+        Vector<IDataObserver> observers = new Vector<IDataObserver>(stackMap.size());
+        for(Stack item : stackMap.values()) {
+            observers.add(item.getObserver());
+        }
+        return observers;
+    }
+
+    public Vector<Stack> getStacks() {
+        Vector<Stack> stacks = new Vector<Stack>();
+        for (Stack stack : stackMap.values()) {
+            stacks.add(stack);
+        }
+        return stacks;
     }
 
     public void addStack(String name, String portName, StackConfig config) {
@@ -39,7 +36,7 @@ public class StackSet {
         SlaveStackConfig cfg = config.buildConfig();
         IDataObserver obs = dnp.AddSlave(portName, name, FilterLevel.LEV_DEBUG, cmdAcceptor, cfg);
 
-        stackMap.put(name, new StackItems(obs, cmdAcceptor));
+        stackMap.put(name, new Stack(obs, cmdAcceptor, config.getDimension()));
     }
 
     public void removeStack(String name) {
@@ -70,6 +67,9 @@ public class StackSet {
         }
     }
 
+    public void start() {
+        dnp.Start();
+    }
     public void stop() {
         dnp.Stop();
     }

@@ -36,7 +36,11 @@ public class Simulator {
         SimNode config = loadXml(args[0]);
         if (config == null) throw new RuntimeException("Could not load config.");
 
-        SimulationManager mgr = new SimulationManager(config);
+        StackSet stackSet = XmlStackLoader.loadConfig(config);
+
+        PointUpdater updater = new PointUpdater(stackSet.getStacks(), 1);
+
+        SimulationManager mgr = new SimulationManager(stackSet, updater);
 
         mgr.start();
 

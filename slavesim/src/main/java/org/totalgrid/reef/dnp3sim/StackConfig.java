@@ -9,20 +9,20 @@ public class StackConfig {
     public static final int linkTimeout = 5000;
     public static final int linkRetry = 0;
 
-    private int statusCount;
-    private int analogCount;
-    private int counterCount;
+    private DataDimension dimension;
 
-    public StackConfig(int statusCount, int analogCount, int counterCount) {
-        this.statusCount = statusCount;
-        this.analogCount = analogCount;
-        this.counterCount = counterCount;
+    public StackConfig(DataDimension dimension) {
+        this.dimension = dimension;
+    }
+
+    public DataDimension getDimension() {
+        return dimension;
     }
 
     public SlaveStackConfig buildConfig() {
         SlaveConfig slaveConfig = new SlaveConfig(); // defaults okay
 
-        DeviceTemplate template = new DeviceTemplate(statusCount, analogCount, counterCount);
+        DeviceTemplate template = new DeviceTemplate(dimension.getStatusCount(), dimension.getAnalogCount(), dimension.getCounterCount());
 
         AppConfig appConfig = new AppConfig(); // defaults okay
 
