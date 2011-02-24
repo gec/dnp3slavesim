@@ -15,16 +15,8 @@ public class StackSet {
         dnp.AddLogHook(logAdapter);
     }
 
-    public Vector<IDataObserver> getObservers() {
-        Vector<IDataObserver> observers = new Vector<IDataObserver>(stackMap.size());
-        for(Stack item : stackMap.values()) {
-            observers.add(item.getObserver());
-        }
-        return observers;
-    }
-
-    public Vector<Stack> getStacks() {
-        Vector<Stack> stacks = new Vector<Stack>();
+    public List<Stack> getStacks() {
+        List<Stack> stacks = new LinkedList<Stack>();
         for (Stack stack : stackMap.values()) {
             stacks.add(stack);
         }

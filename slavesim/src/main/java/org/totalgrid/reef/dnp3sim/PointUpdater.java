@@ -9,10 +9,10 @@ import java.util.*;
 
 
 public class PointUpdater {
-    private Vector<Stack> stacks;
     private final double pointRate;  // update / sec
 
-    //private final int pointCount;
+    private Vector<ObserverUpdater> updaters;
+    private final int pointCount;
 
     private Random random = new Random(System.currentTimeMillis());
 
@@ -20,16 +20,21 @@ public class PointUpdater {
 
     private Timer timer = new Timer();
 
-    public PointUpdater(Vector<Stack> stacks, double pointRate) {
-        this.stacks = stacks;
+    public PointUpdater(Collection<Stack> stacks, double pointRate) {
         this.pointRate = pointRate;
 
-        //pointCount = (dimension.getAnalogCount() + dimension.getStatusCount() + dimension.getCounterCount()) * observers.size();
-
-
+        int count = 0;
+        updaters = new Vector<ObserverUpdater>(stacks.size());
+        for (Stack stack : stacks) {
+            ObserverUpdater updater = new ObserverUpdater(stack.getObserver(), stack.getDimension(), random);
+            updaters.add(updater);
+            count += updater.getPointCount();
+        }
+        pointCount = count;
     }
 
     public void start() {
+        loadInitial();
         timer.scheduleAtFixedRate(new RandomUpdateTask(), 1000, 1000);
     }
 
@@ -41,68 +46,36 @@ public class PointUpdater {
         return Math.abs(random.nextInt()) % mod;
     }
 
+    protected void loadInitial() {
+        for (ObserverUpdater up : updaters) {
+            up.loadAll();
+        }
+    }
+
     class RandomUpdateTask extends TimerTask {
         @Override
         public void run() {
-            //int rand = Math.abs(random.nextInt());
-            //int index = rand % stacks.size();
-            //System.out.println("Index: " + index + ", size: " + stacks.size() + ", rand: " + rand);
-            Stack stack = stacks.get(randPos(stacks.size()));
-            IDataObserver observer = stack.getObserver();
-            DataDimension dimension = stack.getDimension();
+            /*for (ObserverUpdater up : updaters) {
+                up.update(4);
+            }*/
+            double updatesToDo = 20;
+            double updatesPerDevice = updatesToDo / (double)updaters.size();
 
-            observer.Start();
-            int typ = randPos(3);//random.nextInt() % 3;
-            switch (typ) {
-                case 0:
-                    int statusIndex = randPos(dimension.getStatusCount());//random.nextInt() % dimension.getStatusCount();
-                    Binary b = randomBinary(statusIndex);
-                    observer.Update(b, statusIndex);
-                    break;
-                case 1:
-                    int analogIndex =  randPos(dimension.getAnalogCount()); //random.nextInt() % dimension.getAnalogCount();
-                    Analog a = randomAnalog();
-                    observer.Update(a, analogIndex);
-                    break;
-                case 2:
-                    int counterIndex = randPos(dimension.getCounterCount()); //random.nextInt() % dimension.getCounterCount();
-                    Counter c = randomCounter();
-                    observer.Update(c, counterIndex);
-                    break;
-                default: break;
+            if (updatesPerDevice > 1) {
+                System.out.println("Updating all devices with " + (int)updatesPerDevice + " update.");
+                for (ObserverUpdater up : updaters) {
+                    up.update((int)updatesPerDevice);
+                }
+            } else {
+                int devicesToUpdate = (int)(updatesPerDevice * (double)updaters.size());
+                System.out.println("Updating " + devicesToUpdate + "with one update.");
+                Set<Integer> selected = new HashSet<Integer>();
+                for (int i = 0; i < devicesToUpdate; i++) {
+                    int index = SetSelect.selectIndex(randPos(updaters.size()), selected, updaters.size());
+                    updaters.get(index).update(1);
+                    selected.add(index);
+                }
             }
-            observer.End();
         }
-    }
-
-
-    protected Binary randomBinary(int index) {
-        Binary b = new Binary();
-        b.SetToNow();
-
-        boolean value = true;
-        if (lastStatuses.containsKey((Integer)index)) {
-            value = !(boolean)lastStatuses.get((Integer)index);
-            lastStatuses.put((Integer)index, value);
-        }
-        b.SetValue(value);
-        b.SetQuality((short)0);
-        return b;
-    }
-
-    protected Analog randomAnalog() {
-        Analog a = new Analog();
-        a.SetToNow();
-        a.SetQuality((short)0);
-        a.SetValue(random.nextDouble()*100000);
-        return a;
-    }
-
-    protected Counter randomCounter() {
-        Counter c = new Counter();
-        c.SetToNow();
-        c.SetQuality((short)0);
-        c.SetValue(random.nextInt());
-        return c;
     }
 }
