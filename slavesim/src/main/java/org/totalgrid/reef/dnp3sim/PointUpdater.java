@@ -9,6 +9,7 @@ import java.util.*;
 
 
 public class PointUpdater {
+    private final int interval = 100;
     private final double pointRate;  // update / sec
 
     private Vector<ObserverUpdater> updaters;
@@ -39,7 +40,7 @@ public class PointUpdater {
 
     public void start() {
         loadInitial();
-        timer.scheduleAtFixedRate(new RandomUpdateTask(), 1000, 1000);
+        timer.scheduleAtFixedRate(new RandomUpdateTask(), interval, interval);
     }
 
     public void stop() {
@@ -59,7 +60,7 @@ public class PointUpdater {
     class RandomUpdateTask extends TimerTask {
         @Override
         public void run() {
-            double updatesToDo = 20;
+            double updatesToDo = pointCount * ((double)interval/(double)1000) * pointRate;
             double updatesPerDevice = updatesToDo / (double)updaters.size();
 
             if (updatesPerDevice > 1) {

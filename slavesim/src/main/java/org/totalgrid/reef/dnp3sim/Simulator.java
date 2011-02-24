@@ -26,19 +26,33 @@ public class Simulator {
         return config;
     }
 
+    public static void printUsage() {
+        System.out.println("Usage: <config file> <update rate (Hz)>");
+    }
+
     public static void main(String[] args) {
+        double updateRate = 2;
 
         if (args.length < 1) {
-            System.out.println("Must include config file.");
+            printUsage();
             System.exit(1);
         }
 
         SimNode config = loadXml(args[0]);
         if (config == null) throw new RuntimeException("Could not load config.");
 
+        if (args.length > 1) {
+            updateRate = Double.parseDouble(args[1]);
+        }
+
+
         StackSet stackSet = XmlStackLoader.loadConfig(config);
 
-        PointUpdater updater = new PointUpdater(stackSet.getStacks(), 1);
+        PointUpdater updater = new PointUpdater(stackSet.getStacks(), updateRate);
+
+        System.out.println(" - Devices: " + stackSet.getStacks().size());
+        System.out.println(" - Points: " + updater.getPointCount());
+        System.out.println(" - Update rate: " + updateRate + " updates per second per point.");
 
         SimulationManager mgr = new SimulationManager(stackSet, updater);
 
