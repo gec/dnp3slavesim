@@ -5,11 +5,11 @@
     <groupId>org.totalgrid.reef.protocol.dnp3.sim</groupId>
     <artifactId>dnp3-sim-xml</artifactId>
     <packaging>jar</packaging>
-    <version>0.0.1</version>
+    <version>0.0.2-SNAPSHOT</version>
     <parent>
         <groupId>org.totalgrid.reef.protocol.dnp3.sim</groupId>
         <artifactId>dnp3-sim-parent</artifactId>
-        <version>0.0.1</version>
+        <version>0.0.2-SNAPSHOT</version>
         <relativePath>../</relativePath>
     </parent>
     <build>
