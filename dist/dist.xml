@@ -46,5 +46,12 @@
                 <include>*</include>
             </includes>
         </fileSet>
+        <fileSet>
+            <directory>../</directory>
+            <outputDirectory>${outputDir}</outputDirectory>
+            <includes>
+                <include>README.markdown</include>
+            </includes>
+        </fileSet>
     </fileSets>
 </assembly>
