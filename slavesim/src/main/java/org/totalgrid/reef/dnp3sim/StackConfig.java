@@ -21,6 +21,7 @@ public class StackConfig {
 
     public SlaveStackConfig buildConfig() {
         SlaveConfig slaveConfig = new SlaveConfig(); // defaults okay
+        slaveConfig.setMUnsolPackDelay(50);
 
         DeviceTemplate template = new DeviceTemplate(dimension.getStatusCount(), dimension.getAnalogCount(), dimension.getCounterCount());
 

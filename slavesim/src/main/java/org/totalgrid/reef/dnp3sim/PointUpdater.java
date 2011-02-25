@@ -60,21 +60,22 @@ public class PointUpdater {
     class RandomUpdateTask extends TimerTask {
         @Override
         public void run() {
+            int updatedCount = 0;
             double updatesToDo = pointCount * ((double)interval/(double)1000) * pointRate;
             double updatesPerDevice = updatesToDo / (double)updaters.size();
 
-            //System.out.println("Updating per device: " + updatesPerDevice);
             if (updatesPerDevice > 1) {
                 for (ObserverUpdater up : updaters) {
                     up.update((int)updatesPerDevice);
+                    updatedCount += (int)updatesPerDevice;
                 }
             } else {
                 int devicesToUpdate = (int)Math.ceil(updatesPerDevice * (double)updaters.size());
-                //System.out.println("Updating devices: " + devicesToUpdate);
                 Set<Integer> selected = new HashSet<Integer>();
                 for (int i = 0; i < devicesToUpdate; i++) {
                     int index = SetSelect.selectIndex(randPos(updaters.size()), selected, updaters.size());
                     updaters.get(index).update(1);
+                    updatedCount += 1;
                     selected.add(index);
                 }
             }
