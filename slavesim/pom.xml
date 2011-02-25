@@ -5,11 +5,11 @@
     <groupId>org.totalgrid.reef.protocol.dnp3.sim</groupId>
     <artifactId>dnp3-slave-simulator</artifactId>
     <packaging>jar</packaging>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <parent>
         <groupId>org.totalgrid.reef.protocol.dnp3.sim</groupId>
         <artifactId>dnp3-sim-parent</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.0.1</version>
         <relativePath>../</relativePath>
     </parent>
     <build>
@@ -41,7 +41,7 @@
         <dependency>
             <groupId>org.totalgrid.reef.protocol.dnp3.sim</groupId>
             <artifactId>dnp3-sim-xml</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>0.0.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
