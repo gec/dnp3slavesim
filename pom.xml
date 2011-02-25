@@ -35,6 +35,7 @@
         <module>slavesim</module>
         <module>reefconfig</module>
         <module>simxml</module>
+        <module>dist</module>
     </modules>
 </project>
 

@@ -1,0 +1,79 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.totalgrid.reef.protocol.dnp3.sim</groupId>
+    <artifactId>dnp3-sim</artifactId>
+    <packaging>pom</packaging>
+    <version>0.0.1</version>
+    <parent>
+        <groupId>org.totalgrid.reef.protocol.dnp3.sim</groupId>
+        <artifactId>dnp3-sim-parent</artifactId>
+        <version>0.0.1</version>
+        <relativePath>../</relativePath>
+    </parent>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.mycila.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <configuration>
+                    <header>../APACHE_FILE_HEADER</header>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>distro-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>dist.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+    </build>
+
+    <properties>
+        <outputDir>dnp3-sim-${project.version}-dist</outputDir>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.totalgrid.reef.protocol.dnp3.sim</groupId>
+            <artifactId>dnp3-slave-simulator</artifactId>
+            <version>0.0.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.totalgrid.reef.protocol.dnp3.sim</groupId>
+            <artifactId>dnp3-sim-reef</artifactId>
+            <version>0.0.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.totalgrid.reef.protocol.dnp3.sim</groupId>
+            <artifactId>dnp3-sim-xml</artifactId>
+            <version>0.0.1</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>https://repo.totalgrid.org</id>
+            <name>https://repo.totalgrid.org-releases</name>
+            <url>https://repo.totalgrid.org/artifactory/totalgrid-release</url>
+        </repository>
+    </repositories>
+</project>
+
+

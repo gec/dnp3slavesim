@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<simNode version="1.0" targetNamespace="slavesim.dnp3.reef.totalgrid.org" xmlns="slavesim.dnp3.reef.totalgrid.org">
+    <slaveArray startPort="50000" count="3">
+        <pointWidth status="5" analog="5" counter="5"/>
+    </slaveArray>
+</simNode>
