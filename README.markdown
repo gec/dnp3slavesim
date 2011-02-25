@@ -15,7 +15,7 @@ To run the simulator:
 
     java -jar dnp3-slave-simulator-0.0.1.jar <config file> <update rate>
 
-The the update rate represents updates per second per point.
+The update rate represents updates per second per point.
 
 To create a Reef configuration that will run against the simulation configuration file:
 
