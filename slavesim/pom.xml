@@ -6,7 +6,12 @@
     <artifactId>dnp3-slavesim</artifactId>
     <packaging>jar</packaging>
     <version>0.0.1</version>
-
+    <parent>
+        <groupId>org.totalgrid.reef</groupId>
+        <artifactId>dnp3-slavesim-parent</artifactId>
+        <version>0.0.1</version>
+        <relativePath>../</relativePath>
+    </parent>
     <build>
         <plugins>
             <plugin>
@@ -22,6 +27,13 @@
                   </archive>
                 </configuration>
               </plugin>
+            <plugin>
+                <groupId>com.mycila.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <configuration>
+                    <header>../APACHE_FILE_HEADER</header>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
