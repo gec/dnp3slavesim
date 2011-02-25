@@ -27,7 +27,7 @@ Simulation
 
 The simulator tries to achieve the configurable update rate per point across all the points in all of the slave devices.
 Binary inputs are always toggled, while analog and counters are updated with random numbers. The DNP quality field will
-always be "good".
+always be "ONLINE".
 
 Because the update generation is currently very simple, the effective floor on the rate of updates is one point per device
 per 100ms. The effective ceiling is all points on all devices every 100ms.
@@ -61,12 +61,26 @@ If slaves must be split over multiple port ranges, the `<slaveArray>` element ca
 Effective DNP Configuration
 --------------------
 
-- Slave link address: 1
-- Master link address: 100
+### Link layer
+- Slave address: 1
+- Master address: 100
+- Confirms: none
+- Retries: none
+- Timeout: 5000ms
+
+### Application layer
+- Max fragment size: 2048
+- Response timeout: 5000ms
+- Retries: none
+
+### Slave
 - Unsolicited pack timer: 50ms
-
-(More to come)
-
+- Default Binary (static): Object 1 var 2
+- Default Binary (event): Object 2 var 1
+- Default Analog (static): Object 30 var 1
+- Default Analog (event): Object 32 var 1
+- Default Counter (static): Object 20 var 1
+- Default Counter (event): Object 22 var 1
 
 Building
 =============================
