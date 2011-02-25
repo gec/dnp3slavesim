@@ -21,13 +21,13 @@
     under the License.
 
 -->
-<ns2:Master xmlns:ns2="org.psi.xml.dnp3" xmlns="org.psi.xml">
-  <ns2:Stack>
-    <ns2:LinkLayer RemoteBuffFullTimeoutMS="0" NumRetries="3" AckTimeoutMS="1000" UseConfirmations="true" RemoteAddress="1" LocalAddress="100" IsMaster="true"/>
-    <ns2:AppLayer NumRetries="0" MaxFragSize="2048" TimeoutMS="5000"/>
-  </ns2:Stack>
-  <ns2:MasterSettings IntegrityPeriodMS="600000" TaskRetryMS="5000" AllowTimeSync="true"/>
-  <ns2:ScanList>
-  </ns2:ScanList>
-  <ns2:Unsol Class3="true" Class2="true" Class1="true" Enable="true" DoTask="true"/>
-</ns2:Master>
+<dnp3:Master xmlns:dnp3="org.psi.xml.dnp3" xmlns="org.psi.xml">
+  <dnp3:Stack>
+    <dnp3:LinkLayer RemoteBuffFullTimeoutMS="0" NumRetries="3" AckTimeoutMS="1000" UseConfirmations="true" RemoteAddress="1" LocalAddress="100" IsMaster="true"/>
+    <dnp3:AppLayer NumRetries="0" MaxFragSize="2048" TimeoutMS="5000"/>
+  </dnp3:Stack>
+  <dnp3:MasterSettings IntegrityPeriodMS="600000" TaskRetryMS="5000" AllowTimeSync="true"/>
+  <dnp3:ScanList>
+  </dnp3:ScanList>
+  <dnp3:Unsol Class3="true" Class2="true" Class1="true" Enable="true" DoTask="true"/>
+</dnp3:Master>
