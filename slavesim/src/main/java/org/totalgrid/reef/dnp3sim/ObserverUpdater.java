@@ -29,6 +29,8 @@ import org.totalgrid.reef.protocol.dnp3.IDataObserver;
 import java.util.*;
 
 public class ObserverUpdater {
+    private static final int ANALOG_RANGE = 100000;
+
     private final IDataObserver observer;
     private final DataDimension dimension;
     private Random random;
@@ -125,7 +127,7 @@ public class ObserverUpdater {
         Analog a = new Analog();
         a.SetToNow();
         a.SetQuality((short)0);
-        a.SetValue(random.nextDouble()*100000);
+        a.SetValue(random.nextDouble()*ANALOG_RANGE);
         return a;
     }
 

@@ -20,24 +20,19 @@
  */
 package org.totalgrid.reef.dnp3sim;
 
-import org.totalgrid.reef.protocol.dnp3.Analog;
-import org.totalgrid.reef.protocol.dnp3.Binary;
-import org.totalgrid.reef.protocol.dnp3.Counter;
-import org.totalgrid.reef.protocol.dnp3.IDataObserver;
-
 import java.util.*;
 
 
 public class PointUpdater {
-    private final int interval = 100;
+    private static final int INTERVAL = 100;
+    private static final int SECOND = 1000;
+
     private final double pointRate;  // update / sec
 
     private Vector<ObserverUpdater> updaters;
     private final int pointCount;
 
     private Random random = new Random(System.currentTimeMillis());
-
-    private Map<Integer, Boolean> lastStatuses = new HashMap<Integer, Boolean>();
 
     private Timer timer = new Timer();
 
@@ -60,7 +55,7 @@ public class PointUpdater {
 
     public void start() {
         loadInitial();
-        timer.scheduleAtFixedRate(new RandomUpdateTask(), interval, interval);
+        timer.scheduleAtFixedRate(new RandomUpdateTask(), INTERVAL, INTERVAL);
     }
 
     public void stop() {
@@ -81,7 +76,7 @@ public class PointUpdater {
         @Override
         public void run() {
             int updatedCount = 0;
-            double updatesToDo = pointCount * ((double)interval/(double)1000) * pointRate;
+            double updatesToDo = pointCount * ((double) INTERVAL /(double)SECOND) * pointRate;
             double updatesPerDevice = updatesToDo / (double)updaters.size();
 
             if (updatesPerDevice > 1) {

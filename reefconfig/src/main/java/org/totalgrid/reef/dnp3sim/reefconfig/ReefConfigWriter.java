@@ -30,6 +30,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class ReefConfigWriter {
+    private ReefConfigWriter() {}
 
     public static void write(String file, Configuration config) {
         try {

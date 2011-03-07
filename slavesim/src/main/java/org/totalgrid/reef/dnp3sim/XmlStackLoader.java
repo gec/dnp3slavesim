@@ -27,6 +27,8 @@ import org.totalgrid.reef.dnp3sim.xml.SlaveArray;
 
 public class XmlStackLoader {
 
+    private XmlStackLoader() {}
+
     public static StackSet loadConfig(SimNode config) {
         StackSet stackSet = new StackSet();
         for (SlaveArray array : config.getSlaveArray()) {

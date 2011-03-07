@@ -26,6 +26,7 @@ import org.totalgrid.reef.protocol.dnp3.*;
 import java.util.*;
 
 public class StackSet {
+    public static final int RETRY_MS = 5000;
 
     private StackManager dnp = new StackManager(false);
     private Map<String, Stack> stackMap = new HashMap<String, Stack>();
@@ -64,7 +65,7 @@ public class StackSet {
     }
 
     public void addPort(String name, int port) {
-        PhysLayerSettings phys = new PhysLayerSettings(FilterLevel.LEV_WARNING, 5000);
+        PhysLayerSettings phys = new PhysLayerSettings(FilterLevel.LEV_WARNING, RETRY_MS);
         dnp.AddTCPServer(name, phys, "127.0.0.1", port);
     }
 

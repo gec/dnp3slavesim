@@ -31,6 +31,8 @@ import java.io.IOException;
 
 public class SimNodeReader {
 
+    private SimNodeReader() {}
+
     public static SimNode loadConfig(String file) {
         SimNode config = null;
         try {

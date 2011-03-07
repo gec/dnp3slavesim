@@ -29,6 +29,8 @@ import java.util.List;
 
 public class SimNodeGenerator {
 
+    private SimNodeGenerator() {}
+
     public static void printUsage() {
         System.out.println("Usage: <input file> <output file>");
     }

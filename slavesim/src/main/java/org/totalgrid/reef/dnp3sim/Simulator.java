@@ -29,6 +29,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Simulator {
+    private Simulator() {}
 
     public static SimNode loadXml(String file) {
         SimNode config = null;
@@ -59,7 +60,10 @@ public class Simulator {
         }
 
         SimNode config = loadXml(args[0]);
-        if (config == null) throw new RuntimeException("Could not load config.");
+        if (config == null) {
+            System.out.println("Could not load config.");
+            System.exit(1);
+        }
 
         if (args.length > 1) {
             updateRate = Double.parseDouble(args[1]);

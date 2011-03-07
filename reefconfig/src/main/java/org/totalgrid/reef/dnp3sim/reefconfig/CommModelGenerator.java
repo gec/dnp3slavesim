@@ -21,9 +21,6 @@
 package org.totalgrid.reef.dnp3sim.reefconfig;
 
 import org.totalgrid.reef.loader.communications.CommunicationsModel;
-import org.totalgrid.reef.loader.communications.Endpoint;
-
-import java.util.LinkedList;
 import java.util.List;
 
 
