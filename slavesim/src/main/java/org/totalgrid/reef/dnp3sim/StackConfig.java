@@ -24,10 +24,11 @@ package org.totalgrid.reef.dnp3sim;
 import org.totalgrid.reef.protocol.dnp3.*;
 
 public class StackConfig {
-    public static final int slaveAddress = 1;
-    public static final int masterAddress = 100;
-    public static final int linkTimeout = 5000;
-    public static final int linkRetry = 0;
+    public static final int SLAVE_ADDRESS = 1;
+    public static final int MASTER_ADDRESS = 100;
+    public static final int LINK_TIMEOUT = 5000;
+    public static final int LINK_RETRY = 0;
+    public static final int UNSOL_PACK_DELAY = 50;
 
     private DataDimension dimension;
 
@@ -41,13 +42,13 @@ public class StackConfig {
 
     public SlaveStackConfig buildConfig() {
         SlaveConfig slaveConfig = new SlaveConfig(); // defaults okay
-        slaveConfig.setMUnsolPackDelay(50);
+        slaveConfig.setMUnsolPackDelay(UNSOL_PACK_DELAY);
 
         DeviceTemplate template = new DeviceTemplate(dimension.getStatusCount(), dimension.getAnalogCount(), dimension.getCounterCount());
 
         AppConfig appConfig = new AppConfig(); // defaults okay
 
-        LinkConfig linkConfig = new LinkConfig(false, false, linkRetry, slaveAddress, masterAddress, linkTimeout);
+        LinkConfig linkConfig = new LinkConfig(false, false, LINK_RETRY, SLAVE_ADDRESS, MASTER_ADDRESS, LINK_TIMEOUT);
 
         SlaveStackConfig config = new SlaveStackConfig();
         config.setLink(linkConfig);

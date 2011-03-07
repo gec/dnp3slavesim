@@ -32,7 +32,7 @@ public class EndpointGenerator {
     final private int startPort;
     final private int endpointCount;
 
-    final CommEquipmentGenerator equipmentGenerator;
+    final private CommEquipmentGenerator equipmentGenerator;
 
     public EndpointGenerator(String address, String mask, int startPort, int endpointCount, CommEquipmentGenerator equipmentGenerator) {
         this.address = address;
