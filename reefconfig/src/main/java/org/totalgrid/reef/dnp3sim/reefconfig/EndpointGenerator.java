@@ -27,10 +27,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class EndpointGenerator {
-    final private String address;
-    final private String mask;
-    final private int startPort;
-    final private int endpointCount;
+    private final String address;
+    private final String mask;
+    private final int startPort;
+    private final int endpointCount;
 
     final private CommEquipmentGenerator equipmentGenerator;
 
@@ -44,7 +44,7 @@ public class EndpointGenerator {
 
     public List<Endpoint> allEndpoints() {
         List<Endpoint> list = new LinkedList<Endpoint>();
-        for(int i = 0; i < endpointCount; i++) {
+        for (int i = 0; i < endpointCount; i++) {
             final int port = startPort + i;
             list.add(endpoint(port));
         }

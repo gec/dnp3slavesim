@@ -26,8 +26,8 @@ import org.totalgrid.reef.loader.configuration.Configuration;
 import org.totalgrid.reef.loader.equipment.EquipmentModel;
 
 public class ConfigurationGenerator {
-    final private CommModelGenerator commModelGenerator;
-    final private EquipModelGenerator equipModelGenerator;
+    private final CommModelGenerator commModelGenerator;
+    private final EquipModelGenerator equipModelGenerator;
 
     public ConfigurationGenerator(CommModelGenerator commModelGenerator, EquipModelGenerator equipModelGenerator) {
         this.commModelGenerator = commModelGenerator;

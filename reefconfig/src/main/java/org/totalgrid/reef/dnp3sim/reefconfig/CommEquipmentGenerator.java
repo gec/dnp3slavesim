@@ -26,9 +26,9 @@ import org.totalgrid.reef.loader.communications.*;
 import java.util.List;
 
 public class CommEquipmentGenerator {
-    final private int statusCount;
-    final private int analogCount;
-    final private int counterCount;
+    private final int statusCount;
+    private final int analogCount;
+    private final int counterCount;
 
     public CommEquipmentGenerator(int statusCount, int analogCount, int counterCount) {
         this.statusCount = statusCount;
