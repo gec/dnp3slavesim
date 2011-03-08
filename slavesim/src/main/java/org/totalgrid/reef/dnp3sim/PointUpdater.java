@@ -62,10 +62,6 @@ public class PointUpdater {
         timer.cancel();
     }
 
-    protected int randPos(int mod) {
-        return Math.abs(random.nextInt()) % mod;
-    }
-
     protected void loadInitial() {
         for (ObserverUpdater up : updaters) {
             up.loadAll();
@@ -88,7 +84,7 @@ public class PointUpdater {
                 int devicesToUpdate = (int)Math.ceil(updatesPerDevice * (double)updaters.size());
                 Set<Integer> selected = new HashSet<Integer>();
                 for (int i = 0; i < devicesToUpdate; i++) {
-                    int index = SetSelect.selectIndex(randPos(updaters.size()), selected, updaters.size());
+                    int index = SetSelect.selectIndex(random.nextInt(updaters.size()), selected, updaters.size());
                     updaters.get(index).update(1);
                     updatedCount += 1;
                     selected.add(index);

@@ -60,7 +60,7 @@ public class ObserverUpdater {
 
             Set<Integer> selected = new HashSet<Integer>();
             for (int i = 0; i < numPoints; i++) {
-                int gi = SetSelect.selectIndex(randPos(pointCount), selected, pointCount);
+                int gi = SetSelect.selectIndex(random.nextInt(pointCount), selected, pointCount);
                 selected.add(gi);
                 updatePoint(gi);
             }
@@ -87,10 +87,6 @@ public class ObserverUpdater {
     }
     protected void updateCounter(int index) {
         observer.Update(randomCounter(), index);
-    }
-
-    protected int randPos(int mod) {
-        return Math.abs(random.nextInt()) % mod;
     }
 
     public void loadAll() {
