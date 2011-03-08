@@ -23,7 +23,7 @@ package org.totalgrid.reef.dnp3sim;
 
 import java.util.Set;
 
-public class SetSelect {
+public final class SetSelect {
 
     private SetSelect() {}
 

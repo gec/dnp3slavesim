@@ -29,7 +29,7 @@ import javax.xml.bind.Marshaller;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class ReefConfigWriter {
+public final class ReefConfigWriter {
     private ReefConfigWriter() {}
 
     public static void write(String file, Configuration config) {

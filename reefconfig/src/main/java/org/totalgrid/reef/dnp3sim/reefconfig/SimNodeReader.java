@@ -29,7 +29,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 
-public class SimNodeReader {
+public final class SimNodeReader {
 
     private SimNodeReader() {}
 

@@ -28,7 +28,7 @@ import javax.xml.bind.Unmarshaller;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class Simulator {
+public final class Simulator {
     private Simulator() {}
 
     public static SimNode loadXml(String file) {

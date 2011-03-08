@@ -25,7 +25,7 @@ import org.totalgrid.reef.dnp3sim.xml.SimNode;
 import org.totalgrid.reef.dnp3sim.xml.SlaveArray;
 
 
-public class XmlStackLoader {
+public final class XmlStackLoader {
 
     private XmlStackLoader() {}
 

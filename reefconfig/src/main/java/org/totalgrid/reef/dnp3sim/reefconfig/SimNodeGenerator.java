@@ -27,7 +27,7 @@ import org.totalgrid.reef.dnp3sim.xml.SlaveArray;
 import java.util.LinkedList;
 import java.util.List;
 
-public class SimNodeGenerator {
+public final class SimNodeGenerator {
 
     private SimNodeGenerator() {}
 

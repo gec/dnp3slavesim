@@ -30,10 +30,10 @@ public class CommEquipmentGenerator {
     final private int analogCount;
     final private int counterCount;
 
-    public CommEquipmentGenerator(int stCount, int anCount, int cntrCount) {
-        statusCount = stCount;
-        analogCount = anCount;
-        counterCount = cntrCount;
+    public CommEquipmentGenerator(int statusCount, int analogCount, int counterCount) {
+        this.statusCount = statusCount;
+        this.analogCount = analogCount;
+        this.counterCount = counterCount;
     }
 
     public Equipment equipment(String name) {
